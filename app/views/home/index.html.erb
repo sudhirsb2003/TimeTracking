@@ -11,14 +11,12 @@
 		<tr><td class="text-danger"><h4><%= time_tag date %></h4></td></tr>
 		<tr>
 			<th>User Name</th>
-			<th> Time Stamp</th>
 			<th>In Time</th>
 			<th>Status</th>
 		</tr>
 		<% attendences.each do |a| %>
 		<tr>
 			<td><%= link_to a.employee.username, analytics_path(u_name: a.employee.username) %></td>
-			<td><%= a.in_time %></td>
 			<td><%= a.in_time.strftime('%H : %M %P') %></td>
 			<td><%= attendence_status(a) %></td>
 		</tr>
