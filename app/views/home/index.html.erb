@@ -1,0 +1,28 @@
+
+<%= form_tag log_time_path, method: :get, class: "form-inline" do %>
+	<%= text_field_tag :username, '', class: "form-control", placeholder: "enter user name" %>
+	<%= submit_tag 'Track', class: "btn btn-md btn-success" %>
+<% end %>
+<hr>
+
+<h3>Daily Attendnece</h3>
+<% @attendences.each do |date, attendences| %>
+	<table class="table">
+		<tr><td class="text-danger"><h4><%= time_tag date %></h4></td></tr>
+		<tr>
+			<th>User Name</th>
+			<th> Time Stamp</th>
+			<th>In Time</th>
+			<th>Status</th>
+		</tr>
+		<% attendences.each do |a| %>
+		<tr>
+			<td><%= link_to a.employee.username, analytics_path(u_name: a.employee.username) %></td>
+			<td><%= a.in_time %></td>
+			<td><%= a.in_time.strftime('%H : %M %P') %></td>
+			<td><%= attendence_status(a) %></td>
+		</tr>
+		<% end %>
+	</table>
+<% end %>
+

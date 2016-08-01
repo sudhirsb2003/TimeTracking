@@ -1,0 +1,34 @@
+<div class="row">
+	<div class="col-lg-6 col-sm-6 col-xs-12">
+		<div class="well">
+		<% user = @employee.present? ? @employee.try(:username) : "All Employees" %>
+			<h4>Average Login Time of <%= user %> </h4>
+			<%= @average.strftime('%H:%M %P') %>
+		</div>
+	</div>
+
+	<div class="col-lg-6 col-sm-6 col-xs-12">
+		<div class="well">
+			<h4>Late Count THis Month </h4>
+			<% if @employee.present? %>
+				<%= @employee.attendences.where(status: "Late").count %>
+			<% else %>
+				<%= Attendence.where(status: "Late").count %>
+			<% end %>
+		</div>
+	</div>
+
+
+	<div class="col-lg-6 col-sm-6 col-xs-12">
+		<div class="well">
+			<h4>Average Timings Percent </h4>
+		</div>
+	</div>
+
+</div>
+
+<style type="text/css">
+	.well {
+		border :none;
+	}
+</style>
