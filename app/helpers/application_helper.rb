@@ -20,6 +20,7 @@ def bootstrap_class_for flash_type
     login_time_decided_by_office = Time.parse('10:00 am').strftime("%H:%M:%P")
     if in_time > login_time_decided_by_office
       a.update_attributes(status: 'Late')
+      "<span class='btn btn-xs btn-danger'> #{a.status} </span>".html_safe
     end
   end
 
