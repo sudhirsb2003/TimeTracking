@@ -31,7 +31,7 @@
 
 	<div class="col-lg-6 col-sm-6 col-xs-12">
 		<div class="well">
-			<h4>Average Timings Percent </h4>
+			<h4>Timing Graph </h4>
 			<%= line_chart @a.this_month.group(:status).group_by_day(:in_time).count %><hr>
 		</div>
 	</div>
