@@ -1,32 +1,50 @@
+<%= javascript_include_tag "https://www.google.com/jsapi", "chartkick" %>
+
 <div class="row">
 	<div class="col-lg-6 col-sm-6 col-xs-12">
 		<div class="well">
 		<% user = @employee.present? ? @employee.try(:username) : "All Employees" %>
 			<h4>Average Login Time of <%= user %> </h4>
-			<%= @average.strftime('%H:%M %P') %>
+			<%= @average > 0 ? @average.strftime('%H:%M %P') : 0.0 %>
 		</div>
 	</div>
 
 	<div class="col-lg-6 col-sm-6 col-xs-12">
 		<div class="well">
-			<h4>Late Count THis Month </h4>
+			<h4>Late Count This Month </h4>
 			<% if @employee.present? %>
-				<%= @employee.attendences.where(status: "Late").count %>
+				<%= @employee.attendences.late.count %>
 			<% else %>
-				<%= Attendence.where(status: "Late").count %>
 			<% end %>
 		</div>
 	</div>
 
 
+<!-- 	<div class="col-lg-6 col-sm-6 col-xs-12">
+		<div class="well">
+			<h4>Average Timings Percent </h4>
+
+			<hr>
+		</div>
+	</div> -->
+
+
 	<div class="col-lg-6 col-sm-6 col-xs-12">
 		<div class="well">
 			<h4>Average Timings Percent </h4>
+			<%= line_chart @a.this_month.group(:status).group_by_day(:in_time).count %><hr>
 		</div>
 	</div>
 
+<!-- 	<div class="col-lg-6 col-sm-6 col-xs-12">
+		<div class="well">
+			<h4>Average Timings Percent </h4>
+    		<%#= line_chart Attendence.where(status: "late").pluck("in_time").map { |c| { name: c, data: Attendence.today.count }  }, discrete: true %>
+			<hr>
+		</div>
+	</div>
 </div>
-
+ -->
 <style type="text/css">
 	.well {
 		border :none;
